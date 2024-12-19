@@ -107,6 +107,33 @@ button:hover {
     position: absolute;
 }
 
+/* Estilo para el contenedor de los botones de las casas */
+#house-selector {
+    display: flex;
+    justify-content: flex-start; /* Alineación hacia la izquierda */
+    gap: 10px; /* Espacio reducido entre los botones */
+    margin: 10px 0;
+}
+
+/* Estilo de los botones de las casas */
+#house-selector button {
+    font-family: 'Playfair Display', serif;
+    font-size: 1em;
+    background-color: white;
+    color: black;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Casa seleccionada */
+#house-selector button.selected {
+    background-color: navy;
+    color: white;
+}
+
 /* Ajuste para pantallas más pequeñas */
 @media (max-width: 600px) {
     #calendar-container {
