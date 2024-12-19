@@ -13,7 +13,7 @@ body {
 
 /* Estilo del título */
 h1 {
-    margin: 0,1;
+    margin: 0;
     padding: 30px;
     background-color: navy; /* Barra azul marino */
     color: white;
@@ -86,8 +86,8 @@ button:hover {
     align-items: center;
     justify-content: center;
     border: 1px solid #444;
-    width: 40px; /* Reducir ancho */
-    height: 70px; /* Aumentar altura */
+    width: 50px; /* Más cuadrado */
+    height: 50px; /* Igual a ancho */
     cursor: pointer;
     position: relative;
     background-color: black;
@@ -118,8 +118,8 @@ button:hover {
     }
 
     .date {
-        width: 35px; /* Reducir tamaño del cuadrado */
-        height: 60px; /* Aumentar proporción de altura */
+        width: 40px; /* Más cuadrado en móviles */
+        height: 40px; /* Igual a ancho */
         font-size: 0.8em; /* Reducir tamaño del texto */
     }
 
