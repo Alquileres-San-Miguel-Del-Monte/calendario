@@ -13,7 +13,7 @@ body {
 
 /* Estilo del título */
 h1 {
-    margin: 0;
+    margin: 0,1;
     padding: 30px;
     background-color: navy; /* Barra azul marino */
     color: white;
@@ -29,24 +29,23 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: center; /* Centra el calendario y los controles */
-    width: 80%; /* Ajustar el ancho general */
-    max-width: 900px; /* Limitar tamaño en pantallas grandes */
-    margin: 20px auto; /* Centrado en la pantalla */
+    width: 90%; /* Ajustar a pantallas móviles */
+    max-width: 400px; /* Limitar tamaño máximo */
+    margin: 20px auto; /* Centrado */
 }
 
 /* Contenedor de los controles */
 #controls {
     display: flex;
-    align-items: center; /* Centra verticalmente */
-    justify-content: center; /* Centra horizontalmente */
-    margin: 20px 0; /* Espaciado vertical */
-    width: 100%;
-    gap: 10px; /* Espacio entre los elementos */
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
+    gap: 8px;
 }
 
 /* Botones de anterior y siguiente */
 button {
-    padding: 10px 20px;
+    padding: 5px 10px;
     font-size: 1em;
     background-color: navy;
     color: white;
@@ -59,32 +58,26 @@ button:hover {
     background-color: #003366;
 }
 
-/* Nombre del mes con tamaño y estilo similar a los nombres de las casas */
+/* Nombre del mes */
 #currentMonth {
-    font-size: 1em; /* Tamaño de fuente más pequeño */
-    font-family: 'Playfair Display', serif; /* Fuente similar a la de las casas */
-    font-weight: normal; /* Normal, no negrita */
-    background-color: white; /* Fondo blanco */
-    color: black; /* Texto negro */
+    font-size: 1em;
+    font-family: 'Playfair Display', serif;
+    background-color: white;
+    color: black;
     padding: 5px 10px;
     border-radius: 5px;
     text-align: center;
-    margin: 0 10px; /* Espaciado entre los botones */
 }
 
 /* Contenedor del calendario */
 #calendar {
     display: grid;
     grid-template-columns: repeat(7, 1fr); /* 7 columnas */
-    gap: 10px; /* Espacio entre casillas */
-    width: 100%; /* Ajustar ancho general */
-    height: auto;
+    gap: 5px;
+    width: 100%;
     background-color: black;
-    padding: 20px;
-    margin: 20px 0; /* Centrado */
+    padding: 10px;
     box-shadow: 0 4px 10px rgba(255, 255, 255, 0.3);
-    align-items: center; /* Centrar contenido vertical */
-    justify-items: center; /* Centrar contenido horizontal */
 }
 
 /* Estilo de cada día */
@@ -92,14 +85,14 @@ button:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid #444;
-    width: 100px; /* Aumentar tamaño del cuadrado */
-    height: 100px; /* Mantenerlo cuadrado */
+    border: 1px solid #444;
+    width: 40px; /* Reducir ancho */
+    height: 70px; /* Aumentar altura */
     cursor: pointer;
     position: relative;
     background-color: black;
     color: white;
-    font-size: 1.4em; /* Texto ajustado */
+    font-size: 0.9em;
 }
 
 .date:hover {
@@ -110,61 +103,37 @@ button:hover {
 .date.cross::after {
     content: '✘';
     color: red;
-    font-size: 1.8em; /* Reducir tamaño de la cruz */
+    font-size: 1.2em;
     position: absolute;
 }
 
-/* Fuentes desde Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
-
-/* Selector de casa */
-#houses-container {
-    display: flex;
-    justify-content: space-around; /* Junta más los nombres */
-    flex-wrap: nowrap; /* Evita que los nombres bajen de línea */
-    margin-top: 10px;
-    width: 100%;
-    gap: 5px; /* Reduce el espacio entre nombres */
-}
-
-/* Estilo de los nombres de las casas */
-.house-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 1em; /* Texto compacto */
-    color: white;
-    background-color: navy;
-    padding: 5px 10px; /* Reduce padding para encajar mejor */
-    margin: 0;
-    border-radius: 5px;
-    text-align: center;
-    box-sizing: border-box;
-    flex: 1; /* Ajuste automático */
-    white-space: nowrap; /* Evita que el texto se rompa en varias líneas */
-}
-
-/* Ajuste para pantallas más pequeñas (celulares) */
+/* Ajuste para pantallas más pequeñas */
 @media (max-width: 600px) {
     #calendar-container {
         width: 95%; /* Ajustar el contenedor en pantallas pequeñas */
     }
 
     #calendar {
-        width: 95%; /* Ajusta a pantallas pequeñas */
-        padding: 15px;
+        gap: 3px; /* Reducir espacio entre casillas */
     }
 
     .date {
-        width: 70px; /* Casillas más pequeñas en móviles */
-        height: 70px;
-        font-size: 1em; /* Reducir tamaño del texto */
+        width: 35px; /* Reducir tamaño del cuadrado */
+        height: 60px; /* Aumentar proporción de altura */
+        font-size: 0.8em; /* Reducir tamaño del texto */
     }
 
     .date.cross::after {
-        font-size: 1.5em; /* Cruces más pequeñas en móviles */
+        font-size: 1em; /* Cruces más pequeñas en móviles */
     }
 
-    .house-name {
-        font-size: 0.9em; /* Texto más pequeño en móviles */
-        padding: 3px 8px;
+    button {
+        font-size: 0.9em;
+        padding: 5px 8px;
+    }
+
+    #currentMonth {
+        font-size: 0.9em;
+        padding: 3px 6px;
     }
 }
