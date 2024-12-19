@@ -24,22 +24,67 @@ h1 {
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
 
-/* Selector de casa y demás elementos */
-#houseSelector, #controls, #calendar, #houses-container {
-    margin-top: 30px;
+/* Contenedor del calendario */
+#calendar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra el calendario y los controles */
+    width: 80%; /* Ajustar el ancho general */
+    max-width: 900px; /* Limitar tamaño en pantallas grandes */
+    margin: 20px auto; /* Centrado en la pantalla */
+}
+
+/* Contenedor de los controles */
+#controls {
+    display: flex;
+    align-items: center; /* Centra verticalmente */
+    justify-content: center; /* Centra horizontalmente */
+    margin: 20px 0; /* Espaciado vertical */
+    width: 100%;
+    gap: 10px; /* Espacio entre los elementos */
+}
+
+/* Botones de anterior y siguiente */
+button {
+    padding: 10px 20px;
+    font-size: 1em;
+    background-color: navy;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #003366;
+}
+
+/* Nombre del mes con tamaño y estilo similar a los nombres de las casas */
+#currentMonth {
+    font-size: 1em; /* Tamaño de fuente más pequeño */
+    font-family: 'Playfair Display', serif; /* Fuente similar a la de las casas */
+    font-weight: normal; /* Normal, no negrita */
+    background-color: white; /* Fondo blanco */
+    color: black; /* Texto negro */
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-align: center;
+    margin: 0 10px; /* Espaciado entre los botones */
 }
 
 /* Contenedor del calendario */
 #calendar {
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 8px; /* Ajuste del espacio entre los casilleros */
-    width: 90%;
-    max-width: 900px;
+    grid-template-columns: repeat(7, 1fr); /* 7 columnas */
+    gap: 10px; /* Espacio entre casillas */
+    width: 100%; /* Ajustar ancho general */
+    height: auto;
     background-color: black;
-    padding: 10px;
-    margin: auto; /* Centra el calendario */
+    padding: 20px;
+    margin: 20px 0; /* Centrado */
     box-shadow: 0 4px 10px rgba(255, 255, 255, 0.3);
+    align-items: center; /* Centrar contenido vertical */
+    justify-items: center; /* Centrar contenido horizontal */
 }
 
 /* Estilo de cada día */
@@ -48,22 +93,31 @@ h1 {
     align-items: center;
     justify-content: center;
     border: 2px solid #444;
-    aspect-ratio: 1 / 1; /* Casillas cuadradas */
+    width: 100px; /* Aumentar tamaño del cuadrado */
+    height: 100px; /* Mantenerlo cuadrado */
     cursor: pointer;
     position: relative;
     background-color: black;
     color: white;
-    font-size: 1.4em; /* Texto más grande */
+    font-size: 1.4em; /* Texto ajustado */
 }
 
 .date:hover {
     background-color: #333;
 }
 
+/* Cruces más pequeñas */
+.date.cross::after {
+    content: '✘';
+    color: red;
+    font-size: 1.8em; /* Reducir tamaño de la cruz */
+    position: absolute;
+}
+
 /* Fuentes desde Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
 
-/* Contenedor de las casas */
+/* Selector de casa */
 #houses-container {
     display: flex;
     justify-content: space-around; /* Junta más los nombres */
@@ -76,7 +130,7 @@ h1 {
 /* Estilo de los nombres de las casas */
 .house-name {
     font-family: 'Playfair Display', serif;
-    font-size: 1em; /* Texto más compacto */
+    font-size: 1em; /* Texto compacto */
     color: white;
     background-color: navy;
     padding: 5px 10px; /* Reduce padding para encajar mejor */
@@ -90,8 +144,23 @@ h1 {
 
 /* Ajuste para pantallas más pequeñas (celulares) */
 @media (max-width: 600px) {
+    #calendar-container {
+        width: 95%; /* Ajustar el contenedor en pantallas pequeñas */
+    }
+
     #calendar {
-        width: 100%; /* Asegura que el calendario se ajuste a pantallas pequeñas */
+        width: 95%; /* Ajusta a pantallas pequeñas */
+        padding: 15px;
+    }
+
+    .date {
+        width: 70px; /* Casillas más pequeñas en móviles */
+        height: 70px;
+        font-size: 1em; /* Reducir tamaño del texto */
+    }
+
+    .date.cross::after {
+        font-size: 1.5em; /* Cruces más pequeñas en móviles */
     }
 
     .house-name {
