@@ -8,20 +8,45 @@ body {
     justify-content: flex-start;
     background-color: black; /* Fondo negro */
     height: 100vh;
-  }
+    color: white; /* Texto blanco */
+}
 
 /* Estilo del título */
 h1 {
-    margin: 0;
+    margin: 1;
     padding: 30px;
     background-color: navy; /* Barra azul marino */
-    color: white; /* Texto blanco */
+    color: white;
     text-align: center;
     width: 100%;
-    font-family: 'Roboto', sans-serif; /* Fuente más llamativa */
-    font-size: 2em; /* Título más grande */
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Sombra suave en el texto */
-  }
+    font-family: 'Playfair Display', serif; /* Fuente llamativa */
+    font-size: 2em;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Selector de casa y demás elementos */
+#houseSelector, #controls, #calendar {
+    margin-top: 60px; /* Aumenté el margen superior para más separación */
+}
+
+/* Selector de casa */
+#houseSelector {
+    margin-bottom: 20px;
+}
+
+#houseSelector select {
+    padding: 20px;
+    font-size: 1em;
+    background-color: navy;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#houseSelector select:hover {
+    background-color: #003366;
+}
 
 /* Contenedor de los controles */
 #controls {
@@ -29,68 +54,67 @@ h1 {
     justify-content: center;
     align-items: center;
     margin: 10px 0;
-  }
+}
 
 /* Mes y año */
 #currentMonth {
     margin: 0 20px;
-    font-size: 1.5em; /* Aumentado el tamaño de la fuente */
+    font-size: 1.5em;
     font-weight: bold;
     color: white;
-  }
+}
 
 /* Estilo de los botones */
 button {
-    padding: 15px 25px; /* Aumenté el tamaño de los botones */
-    font-size: 1.2em; /* Tamaño de fuente más grande */
-    background-color: navy; /* Botón azul marino */
-    color: white; /* Texto blanco */
+    padding: 10px 20px;
+    font-size: 1em;
+    background-color: navy;
+    color: white;
     border: none;
     cursor: pointer;
     border-radius: 5px;
-  }
+}
 
 button:hover {
-    background-color: #003366; /* Azul marino más oscuro */
-  }
+    background-color: #003366;
+}
 
 /* Contenedor del calendario */
 #calendar {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 5px;
-    width: 90%; /* Hizo más grande el calendario */
-    max-width: 900px; /* Aumenté el tamaño máximo del calendario */
-    background-color: black; /* Fondo negro del calendario */
-    padding: 20px; /* Aumenté el relleno para más espacio */
-    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.3); /* Sombra más difusa */
-    overflow: auto;
-  }
+    width: 90%;
+    max-width: 900px;
+    background-color: black;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.3);
+}
 
 /* Estilo de cada día */
 .date {
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid #444; /* Bordes gris oscuro */
-    height: 120px; /* Aumenté el tamaño de las celdas */
+    border: 1px solid #444;
+    aspect-ratio: 1 / 1;
     cursor: pointer;
     position: relative;
-    background-color: black; /* Fondo negro */
-    color: white; /* Texto blanco */
-    font-size: 1.2em; /* Aumenté el tamaño de los números */
-  }
+    background-color: black;
+    color: white;
+    font-size: 1.2em;
+}
 
 .date:hover {
-    background-color: #333; /* Fondo gris oscuro al pasar el cursor */
-  }
+    background-color: #333;
+}
 
 .date.cross::after {
     content: '✘';
-    color: red; /* Cruz roja */
-    font-size: 2.5em; /* Aumenté el tamaño de la cruz */
+    color: red;
+    font-size: 2em;
     position: absolute;
-  }
+}
 
 /* Fuentes desde Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
