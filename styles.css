@@ -1,61 +1,104 @@
+/* Estilo general del cuerpo */
 body {
-    font-family: Arial, sans-serif;
-    background-color: black;
-    color: white;
     margin: 0;
-    padding: 0;
-}
-
-.container {
-    max-width: 900px;
-    margin: 0 auto;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: black; /* Fondo negro */
+    height: 100vh;
+  }
+  
+  /* Estilo del título */
+  h1 {
+    margin: 0;
+    padding: 20px;
+    background-color: navy; /* Barra azul marino */
+    color: white; /* Texto blanco */
     text-align: center;
-    padding-top: 20px;
-}
-
-h1 {
-    color: #1E3A8A; /* Azul marino */
-    font-size: 2rem;
-    background-color: black;
-    padding: 10px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-}
-
-#calendar-container {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 5px;
-    max-width: 100%;
-    justify-items: center;
-}
-
-#calendar-container .day,
-#calendar-container .date {
-    width: 40px;
-    height: 40px;
+    width: 100%;
+    font-family: 'Roboto', sans-serif; /* Fuente más llamativa */
+    font-size: 1.8em; /* Tamaño reducido del título */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Sombra suave en el texto */
+  }
+  
+  /* Contenedor de los controles */
+  #controls {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #333;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-#calendar-container .day {
-    background-color: #444;
+    margin: 10px 0;
+  }
+  
+  /* Mes y año */
+  #currentMonth {
+    margin: 0 20px;
+    font-size: 1.2em; /* Tamaño de fuente más pequeño */
     font-weight: bold;
-}
-
-#calendar-container .date {
-    background-color: #666;
     color: white;
-}
-
-#calendar-container .booked {
-    background-color: red;
-}
-
-#calendar-container .booked:hover {
-    background-color: darkred;
-}
+  }
+  
+  /* Estilo de los botones */
+  button {
+    padding: 12px 20px; /* Tamaño reducido de los botones */
+    font-size: 1em; /* Tamaño de fuente más pequeño */
+    background-color: navy; /* Botón azul marino */
+    color: white; /* Texto blanco */
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  button:hover {
+    background-color: #003366; /* Azul marino más oscuro */
+  }
+  
+  /* Contenedor del calendario */
+  #calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 3px; /* Reduce el espacio entre los días */
+    width: 85%; /* Reduce el tamaño del calendario */
+    max-width: 700px; /* Tamaño máximo reducido */
+    background-color: black; /* Fondo negro del calendario */
+    padding: 15px; /* Reduce el relleno */
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.3); /* Sombra más difusa */
+    overflow: auto;
+  }
+  
+  /* Estilo de cada día */
+  .date {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #444; /* Bordes gris oscuro */
+    height: 80px; /* Tamaño reducido de las celdas */
+    cursor: pointer;
+    position: relative;
+    background-color: black; /* Fondo negro */
+    color: white; /* Texto blanco */
+    font-size: 1.1em; /* Tamaño reducido de los números */
+  }
+  
+  /* Ajustes para dispositivos móviles */
+  @media (max-width: 600px) {
+    h1 {
+      font-size: 1.5em; /* Tamaño del título más pequeño en pantallas pequeñas */
+    }
+  
+    #calendar {
+      width: 90%; /* Hace el calendario más grande en pantallas pequeñas */
+      max-width: 100%; /* Se ajusta al 100% del ancho en pantallas pequeñas */
+    }
+  
+    .date {
+      height: 60px; /* Reducción adicional del tamaño de las celdas */
+      font-size: 1em; /* Reduce el tamaño del texto en las celdas */
+    }
+  
+    #controls {
+      font-size: 0.9em; /* Reducir tamaño de fuente de los controles */
+    }
+  }
+  
