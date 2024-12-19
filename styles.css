@@ -13,7 +13,7 @@ body {
 
 /* Estilo del título */
 h1 {
-    margin: 1;
+    margin: 0,1;
     padding: 30px;
     background-color: navy; /* Barra azul marino */
     color: white;
@@ -26,21 +26,21 @@ h1 {
 
 /* Selector de casa y demás elementos */
 #houseSelector, #controls, #calendar, #houses-container {
-    margin-top: 60px; /* Aumenté el margen superior para más separación */
+    margin-top: 30px; /* Aumenté el margen superior para más separación */
 }
 
 /* Selector de casa */
 #houseSelector {
-    margin-bottom: 20px;
+    margin-bottom: 50px;
 }
 
 #houseSelector select {
-    padding: 20px;
-    font-size: 1em;
+    padding: 10px;
+    font-size: 0em;
     background-color: navy;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 0px;
     cursor: pointer;
 }
 
@@ -72,7 +72,7 @@ button {
     color: white;
     border: none;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 0px;
 }
 
 button:hover {
@@ -83,11 +83,11 @@ button:hover {
 #calendar {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 5px;
+    gap: 10px;
     width: 90%;
     max-width: 900px;
     background-color: black;
-    padding: 20px;
+    padding: 5px;
     box-shadow: 0 4px 10px rgba(255, 255, 255, 0.3);
 }
 
@@ -96,13 +96,13 @@ button:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid #444;
-    aspect-ratio: 1 / 1;
+    border: 2px solid #444;
+    aspect-ratio: 4 / 4;
     cursor: pointer;
     position: relative;
     background-color: black;
     color: white;
-    font-size: 1.2em;
+    font-size: 1.6em;
 }
 
 .date:hover {
@@ -124,7 +124,7 @@ button:hover {
     display: flex;
     justify-content: space-evenly; /* Distribuye las casas de manera equitativa */
     flex-wrap: wrap; /* Permite que los nombres de las casas se ajusten si no caben en una línea */
-    margin-top: 20px; /* Espacio superior entre el título y las casas */
+    margin-top: 0px; /* Espacio superior entre el título y las casas */
     width: 100%;
 }
 
