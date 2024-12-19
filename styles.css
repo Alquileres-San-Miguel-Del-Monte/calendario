@@ -25,7 +25,7 @@ h1 {
 }
 
 /* Selector de casa y demás elementos */
-#houseSelector, #controls, #calendar {
+#houseSelector, #controls, #calendar, #houses-container {
     margin-top: 60px; /* Aumenté el margen superior para más separación */
 }
 
@@ -117,4 +117,35 @@ button:hover {
 }
 
 /* Fuentes desde Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
+
+/* Contenedor de las casas */
+#houses-container {
+    display: flex;
+    justify-content: space-evenly; /* Distribuye las casas de manera equitativa */
+    flex-wrap: wrap; /* Permite que los nombres de las casas se ajusten si no caben en una línea */
+    margin-top: 20px; /* Espacio superior entre el título y las casas */
+    width: 100%;
+}
+
+/* Estilo de los nombres de las casas */
+.house-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2em; /* Tamaño más pequeño */
+    color: white;
+    background-color: navy;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 5px;
+    text-align: center;
+    flex: 1 1 100px; /* Permite que las casas se ajusten a un tamaño adecuado */
+    box-sizing: border-box;
+}
+
+/* Ajuste para pantallas más pequeñas (celulares) */
+@media (max-width: 600px) {
+    .house-name {
+        font-size: 1em; /* Reducir un poco el tamaño de la fuente en celulares */
+        padding: 8px 15px; /* Ajustar el padding para que encaje mejor */
+    }
+}
