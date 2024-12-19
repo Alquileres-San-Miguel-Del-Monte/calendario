@@ -1,93 +1,88 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const prevMonthButton = document.getElementById("prevMonth");
-    const nextMonthButton = document.getElementById("nextMonth");
-    const currentMonthDisplay = document.getElementById("currentMonth");
-    const calendarContainer = document.getElementById("calendar");
-  
-    const months = [
-      "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
-      "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
-    ];
-    const daysOfWeek = ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"];
-    let currentDate = new Date(); // Fecha actual
-    let bookedDates = JSON.parse(localStorage.getItem("bookedDates")) || []; // Fechas ocupadas desde localStorage
-  
-    // Función para generar el calendario
-    function generateCalendar(month, year) {
-      // Limpiar el calendario actual
-      calendarContainer.innerHTML = "";
-  
-      // Mostrar los días de la semana
-      daysOfWeek.forEach(day => {
-        const dayElement = document.createElement("div");
-        dayElement.classList.add("date");
-        dayElement.textContent = day;
-        dayElement.style.fontWeight = "bold"; // Negrita para los días de la semana
-        calendarContainer.appendChild(dayElement);
-      });
-  
-      // Obtener el primer día del mes y el número de días en el mes
-      const firstDayOfMonth = new Date(year, month, 1).getDay();
-      const lastDayOfMonth = new Date(year, month + 1, 0).getDate();
-  
-      // Ajustar para que el primer día de la semana sea lunes (0 = domingo, 1 = lunes, ...)
-      const startDay = firstDayOfMonth === 0 ? 6 : firstDayOfMonth - 1;
-  
-      // Rellenar las celdas del calendario
-      for (let i = 0; i < startDay; i++) {
-        const emptyCell = document.createElement("div");
-        emptyCell.classList.add("date");
-        calendarContainer.appendChild(emptyCell);
-      }
-  
-      // Mostrar los días del mes
-      for (let day = 1; day <= lastDayOfMonth; day++) {
-        const dateCell = document.createElement("div");
-        dateCell.classList.add("date");
-        dateCell.textContent = day;
-  
-        // Verificar si la fecha está marcada como ocupada
-        if (bookedDates.includes(`${year}-${month + 1}-${day}`)) {
-          dateCell.classList.add("cross");
-        }
-  
-        // Agregar evento para marcar/desmarcar fechas
-        dateCell.addEventListener("dblclick", () => toggleDateBooking(year, month, day, dateCell));
-  
-        calendarContainer.appendChild(dateCell);
-      }
+// Variables globales para el mes y año actuales
+let currentMonth = new Date().getMonth();
+let currentYear = new Date().getFullYear();
+
+// Obtener referencias a los elementos del DOM
+const calendar = document.getElementById('calendar');
+const currentMonthElem = document.getElementById('currentMonth');
+
+// Función para actualizar el calendario
+function updateCalendar() {
+  // Crear un objeto Date con el primer día del mes actual
+  const firstDay = new Date(currentYear, currentMonth, 1);
+  const lastDay = new Date(currentYear, currentMonth + 1, 0);
+
+  // Obtener el número de días del mes actual
+  const totalDays = lastDay.getDate();
+  const startingDay = firstDay.getDay(); // Día de la semana del primer día del mes
+
+  // Limpiar el calendario
+  calendar.innerHTML = '';
+
+  // Mostrar el mes y el año
+  currentMonthElem.textContent = `${getMonthName(currentMonth)} ${currentYear}`;
+
+  // Agregar días en el calendario
+  for (let i = 0; i < startingDay; i++) {
+    // Agregar celdas vacías antes de los primeros días del mes
+    const emptyCell = document.createElement('div');
+    calendar.appendChild(emptyCell);
+  }
+
+  for (let day = 1; day <= totalDays; day++) {
+    const dayCell = document.createElement('div');
+    dayCell.classList.add('date');
+    dayCell.textContent = day;
+
+    // Comprobar si el día ya tiene una cruz marcada
+    if (localStorage.getItem(`${currentYear}-${currentMonth + 1}-${day}`) === 'cross') {
+      dayCell.classList.add('cross');
     }
-  
-    // Función para marcar/desmarcar fechas
-    function toggleDateBooking(year, month, day, dateCell) {
-      const dateKey = `${year}-${month + 1}-${day}`;
-      if (bookedDates.includes(dateKey)) {
-        bookedDates = bookedDates.filter(date => date !== dateKey); // Desmarcar
-        dateCell.classList.remove("cross");
-      } else {
-        bookedDates.push(dateKey); // Marcar
-        dateCell.classList.add("cross");
-      }
-  
-      // Guardar las fechas ocupadas en el localStorage para persistencia
-      localStorage.setItem("bookedDates", JSON.stringify(bookedDates));
-    }
-  
-    // Función para manejar los botones de mes anterior y siguiente
-    prevMonthButton.addEventListener("click", () => {
-      currentDate.setMonth(currentDate.getMonth() - 1);
-      currentMonthDisplay.textContent = `${months[currentDate.getMonth()]} ${currentDate.getFullYear()}`;
-      generateCalendar(currentDate.getMonth(), currentDate.getFullYear());
-    });
-  
-    nextMonthButton.addEventListener("click", () => {
-      currentDate.setMonth(currentDate.getMonth() + 1);
-      currentMonthDisplay.textContent = `${months[currentDate.getMonth()]} ${currentDate.getFullYear()}`;
-      generateCalendar(currentDate.getMonth(), currentDate.getFullYear());
-    });
-  
-    // Inicializar el calendario con el mes y año actuales
-    currentMonthDisplay.textContent = `${months[currentDate.getMonth()]} ${currentDate.getFullYear()}`;
-    generateCalendar(currentDate.getMonth(), currentDate.getFullYear());
-  });
-  
+
+    // Agregar evento de doble clic para marcar y desmarcar la cruz
+    dayCell.addEventListener('dblclick', () => toggleCross(day, dayCell));
+
+    calendar.appendChild(dayCell);
+  }
+}
+
+// Función para cambiar de mes
+function changeMonth(offset) {
+  currentMonth += offset;
+  if (currentMonth < 0) {
+    currentMonth = 11;
+    currentYear--;
+  } else if (currentMonth > 11) {
+    currentMonth = 0;
+    currentYear++;
+  }
+  updateCalendar();
+}
+
+// Función para obtener el nombre del mes
+function getMonthName(monthIndex) {
+  const months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+  return months[monthIndex];
+}
+
+// Función para marcar y desmarcar las cruces
+function toggleCross(day, dayCell) {
+  const dateKey = `${currentYear}-${currentMonth + 1}-${day}`;
+
+  if (dayCell.classList.contains('cross')) {
+    // Si ya tiene cruz, la quitamos
+    dayCell.classList.remove('cross');
+    localStorage.removeItem(dateKey); // Remover la cruz de localStorage
+  } else {
+    // Si no tiene cruz, la agregamos
+    dayCell.classList.add('cross');
+    localStorage.setItem(dateKey, 'cross'); // Guardar la cruz en localStorage
+  }
+}
+
+// Inicializar el calendario al cargar la página
+updateCalendar();
+
+// Agregar eventos a los botones para cambiar de mes
+document.getElementById('prevMonth').addEventListener('click', () => changeMonth(-1));
+document.getElementById('nextMonth').addEventListener('click', () => changeMonth(1));
