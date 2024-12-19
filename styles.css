@@ -13,7 +13,7 @@ body {
 
 /* Estilo del título */
 h1 {
-    margin: 0,1;
+    margin: 0;
     padding: 30px;
     background-color: navy; /* Barra azul marino */
     color: white;
@@ -26,68 +26,19 @@ h1 {
 
 /* Selector de casa y demás elementos */
 #houseSelector, #controls, #calendar, #houses-container {
-    margin-top: 30px; /* Aumenté el margen superior para más separación */
-}
-
-/* Selector de casa */
-#houseSelector {
-    margin-bottom: 50px;
-}
-
-#houseSelector select {
-    padding: 10px;
-    font-size: 0em;
-    background-color: navy;
-    color: white;
-    border: none;
-    border-radius: 0px;
-    cursor: pointer;
-}
-
-#houseSelector select:hover {
-    background-color: #003366;
-}
-
-/* Contenedor de los controles */
-#controls {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 10px 0;
-}
-
-/* Mes y año */
-#currentMonth {
-    margin: 0 20px;
-    font-size: 1.5em;
-    font-weight: bold;
-    color: white;
-}
-
-/* Estilo de los botones */
-button {
-    padding: 10px 20px;
-    font-size: 1em;
-    background-color: navy;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 0px;
-}
-
-button:hover {
-    background-color: #003366;
+    margin-top: 30px;
 }
 
 /* Contenedor del calendario */
 #calendar {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 10px;
+    gap: 8px; /* Ajuste del espacio entre los casilleros */
     width: 90%;
     max-width: 900px;
     background-color: black;
-    padding: 5px;
+    padding: 10px;
+    margin: auto; /* Centra el calendario */
     box-shadow: 0 4px 10px rgba(255, 255, 255, 0.3);
 }
 
@@ -97,23 +48,16 @@ button:hover {
     align-items: center;
     justify-content: center;
     border: 2px solid #444;
-    aspect-ratio: 4 / 4;
+    aspect-ratio: 1 / 1; /* Casillas cuadradas */
     cursor: pointer;
     position: relative;
     background-color: black;
     color: white;
-    font-size: 1.6em;
+    font-size: 1.4em; /* Texto más grande */
 }
 
 .date:hover {
     background-color: #333;
-}
-
-.date.cross::after {
-    content: '✘';
-    color: red;
-    font-size: 2em;
-    position: absolute;
 }
 
 /* Fuentes desde Google Fonts */
@@ -122,30 +66,36 @@ button:hover {
 /* Contenedor de las casas */
 #houses-container {
     display: flex;
-    justify-content: space-evenly; /* Distribuye las casas de manera equitativa */
-    flex-wrap: wrap; /* Permite que los nombres de las casas se ajusten si no caben en una línea */
-    margin-top: 0px; /* Espacio superior entre el título y las casas */
+    justify-content: space-around; /* Junta más los nombres */
+    flex-wrap: nowrap; /* Evita que los nombres bajen de línea */
+    margin-top: 10px;
     width: 100%;
+    gap: 5px; /* Reduce el espacio entre nombres */
 }
 
 /* Estilo de los nombres de las casas */
 .house-name {
     font-family: 'Playfair Display', serif;
-    font-size: 1.2em; /* Tamaño más pequeño */
+    font-size: 1em; /* Texto más compacto */
     color: white;
     background-color: navy;
-    padding: 10px 20px;
-    margin: 5px;
+    padding: 5px 10px; /* Reduce padding para encajar mejor */
+    margin: 0;
     border-radius: 5px;
     text-align: center;
-    flex: 1 1 100px; /* Permite que las casas se ajusten a un tamaño adecuado */
     box-sizing: border-box;
+    flex: 1; /* Ajuste automático */
+    white-space: nowrap; /* Evita que el texto se rompa en varias líneas */
 }
 
 /* Ajuste para pantallas más pequeñas (celulares) */
 @media (max-width: 600px) {
+    #calendar {
+        width: 100%; /* Asegura que el calendario se ajuste a pantallas pequeñas */
+    }
+
     .house-name {
-        font-size: 1em; /* Reducir un poco el tamaño de la fuente en celulares */
-        padding: 8px 15px; /* Ajustar el padding para que encaje mejor */
+        font-size: 0.9em; /* Texto más pequeño en móviles */
+        padding: 3px 8px;
     }
 }
