@@ -70,6 +70,9 @@ function renderCalendar() {
 
     calendar.appendChild(dateCell);
   }
+
+  // Resaltar la casa seleccionada
+  highlightSelectedHouse();
 }
 
 // Cambiar de casa
@@ -79,6 +82,19 @@ houseSelector.addEventListener("click", (e) => {
     renderCalendar();
   }
 });
+
+// Función para resaltar la casa seleccionada
+function highlightSelectedHouse() {
+  const houseButtons = houseSelector.querySelectorAll("button");
+  
+  houseButtons.forEach((button) => {
+    if (button.getAttribute("data-house") === currentHouse) {
+      button.classList.add("selected");
+    } else {
+      button.classList.remove("selected");
+    }
+  });
+}
 
 // Navegar entre meses
 prevMonthBtn.addEventListener("click", () => {
