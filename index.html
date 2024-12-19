@@ -8,12 +8,23 @@
 </head>
 <body>
   <h1>Alquileres San Miguel Del Monte</h1>
-  <div id="controls">
-    <button id="prevMonth">Anterior</button>
-    <span id="currentMonth"></span>
-    <button id="nextMonth">Siguiente</button>
+  
+  <div id="house-selector">
+    <button data-house="LOS_CHICOS">Los Chicos</button>
+    <button data-house="LOS_NIETOS">Los Nietos</button>
+    <button data-house="LA_SONADA">La Soñada</button>
+    <button data-house="EL_ENCANTO">El Encanto</button>
   </div>
-  <div id="calendar"></div>
+
+  <div id="calendar-container">
+    <div id="controls">
+      <button id="prevMonth">Anterior</button>
+      <span id="currentMonth"></span>
+      <button id="nextMonth">Siguiente</button>
+    </div>
+    <div id="calendar"></div>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>
