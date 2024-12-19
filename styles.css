@@ -9,96 +9,88 @@ body {
     background-color: black; /* Fondo negro */
     height: 100vh;
   }
-  
-  /* Estilo del título */
-  h1 {
+
+/* Estilo del título */
+h1 {
     margin: 0;
-    padding: 20px;
+    padding: 30px;
     background-color: navy; /* Barra azul marino */
     color: white; /* Texto blanco */
     text-align: center;
     width: 100%;
     font-family: 'Roboto', sans-serif; /* Fuente más llamativa */
-    font-size: 1.8em; /* Tamaño reducido del título */
+    font-size: 2em; /* Título más grande */
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Sombra suave en el texto */
   }
-  
-  /* Contenedor de los controles */
-  #controls {
+
+/* Contenedor de los controles */
+#controls {
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 10px 0;
   }
-  
-  /* Mes y año */
-  #currentMonth {
+
+/* Mes y año */
+#currentMonth {
     margin: 0 20px;
-    font-size: 1.2em; /* Tamaño de fuente más pequeño */
+    font-size: 1.5em; /* Aumentado el tamaño de la fuente */
     font-weight: bold;
     color: white;
   }
-  
-  /* Estilo de los botones */
-  button {
-    padding: 12px 20px; /* Tamaño reducido de los botones */
-    font-size: 1em; /* Tamaño de fuente más pequeño */
+
+/* Estilo de los botones */
+button {
+    padding: 15px 25px; /* Aumenté el tamaño de los botones */
+    font-size: 1.2em; /* Tamaño de fuente más grande */
     background-color: navy; /* Botón azul marino */
     color: white; /* Texto blanco */
     border: none;
     cursor: pointer;
     border-radius: 5px;
   }
-  
-  button:hover {
+
+button:hover {
     background-color: #003366; /* Azul marino más oscuro */
   }
-  
-  /* Contenedor del calendario */
-  #calendar {
+
+/* Contenedor del calendario */
+#calendar {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 3px; /* Reduce el espacio entre los días */
-    width: 85%; /* Reduce el tamaño del calendario */
-    max-width: 700px; /* Tamaño máximo reducido */
+    gap: 5px;
+    width: 90%; /* Hizo más grande el calendario */
+    max-width: 900px; /* Aumenté el tamaño máximo del calendario */
     background-color: black; /* Fondo negro del calendario */
-    padding: 15px; /* Reduce el relleno */
+    padding: 20px; /* Aumenté el relleno para más espacio */
     box-shadow: 0 4px 10px rgba(255, 255, 255, 0.3); /* Sombra más difusa */
     overflow: auto;
   }
-  
-  /* Estilo de cada día */
-  .date {
+
+/* Estilo de cada día */
+.date {
     display: flex;
     align-items: center;
     justify-content: center;
     border: 1px solid #444; /* Bordes gris oscuro */
-    height: 80px; /* Tamaño reducido de las celdas */
+    height: 120px; /* Aumenté el tamaño de las celdas */
     cursor: pointer;
     position: relative;
     background-color: black; /* Fondo negro */
     color: white; /* Texto blanco */
-    font-size: 1.1em; /* Tamaño reducido de los números */
+    font-size: 1.2em; /* Aumenté el tamaño de los números */
   }
-  
-  /* Ajustes para dispositivos móviles */
-  @media (max-width: 600px) {
-    h1 {
-      font-size: 1.5em; /* Tamaño del título más pequeño en pantallas pequeñas */
-    }
-  
-    #calendar {
-      width: 90%; /* Hace el calendario más grande en pantallas pequeñas */
-      max-width: 100%; /* Se ajusta al 100% del ancho en pantallas pequeñas */
-    }
-  
-    .date {
-      height: 60px; /* Reducción adicional del tamaño de las celdas */
-      font-size: 1em; /* Reduce el tamaño del texto en las celdas */
-    }
-  
-    #controls {
-      font-size: 0.9em; /* Reducir tamaño de fuente de los controles */
-    }
+
+.date:hover {
+    background-color: #333; /* Fondo gris oscuro al pasar el cursor */
   }
-  
+
+.date.cross::after {
+    content: '✘';
+    color: red; /* Cruz roja */
+    font-size: 2.5em; /* Aumenté el tamaño de la cruz */
+    position: absolute;
+  }
+
+/* Fuentes desde Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
