@@ -30,8 +30,8 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: center; /* Centra el calendario y los controles */
-    width: 100%; /* Ajustar a pantallas móviles */
-    max-width: 500px; /* Limitar tamaño máximo */
+    width: 80%; /* Ajustar a pantallas móviles */
+    max-width: 400px; /* Limitar tamaño máximo */
     margin: 15px auto; /* Centrado */
 }
 
@@ -41,7 +41,7 @@ h1 {
     align-items: center;
     justify-content: center;
     margin: 10px 0;
-    gap: 10px;
+    gap: 8px;
 }
 
 /* Botones de anterior y siguiente */
@@ -97,7 +97,7 @@ button:hover {
 }
 
 .date:hover {
-    background-color: #555;
+    background-color: #444;
 }
 
 /* Cruces más pequeñas */
@@ -146,9 +146,9 @@ button:hover {
     }
 
     .date {
-        width: 70px; /* Más cuadrado en móviles */
-        height: 70px; /* Igual a ancho */
-        font-size: 1.2em; /* Reducir tamaño del texto */
+        width: 50px; /* Más cuadrado en móviles */
+        height: 50px; /* Igual a ancho */
+        font-size: 1.0em; /* Reducir tamaño del texto */
     }
 
     .date.cross::after {
@@ -165,8 +165,8 @@ button:hover {
     font-weight: bold;
     text-align: center;
     color: white;
-    padding: 5px 0;
-    border-bottom: 1px solid #444;
+    padding: 10px 1;
+    border-bottom: 3px solid #444;
 }
 
 
