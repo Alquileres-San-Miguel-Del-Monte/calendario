@@ -39,14 +39,13 @@ function renderCalendar() {
   calendar.innerHTML = "";
 
   // Agregar los días de la semana
-const daysOfWeek = ["L", "M", "", "J", "V", "S", "D"];
-daysOfWeek.forEach((day) => {
-  const dayHeader = document.createElement("div");
-  dayHeader.className = "day-header"; // Clase para estilo
-  dayHeader.textContent = day;
-  calendar.appendChild(dayHeader);
-});
-
+  const daysOfWeek = ["L", "M", "M", "J", "V", "S", "D"];
+  daysOfWeek.forEach((day) => {
+    const dayHeader = document.createElement("div");
+    dayHeader.className = "day-header"; // Clase para estilo
+    dayHeader.textContent = day;
+    calendar.appendChild(dayHeader);
+  });
 
   // Agregar los días vacíos al principio
   for (let i = 0; i < firstDay; i++) {
@@ -67,14 +66,25 @@ daysOfWeek.forEach((day) => {
       dateCell.classList.add("cross");
     }
 
-    // Agregar el evento de doble clic
-    dateCell.addEventListener("dblclick", () => {
-      if (markedDates[currentHouse][dateKey]) {
-        delete markedDates[currentHouse][dateKey];
+    // Agregar el evento de clic para marcar/desmarcar la cruz
+    dateCell.addEventListener("click", function () {
+      const currentDate = this;
+
+      // Si es el mismo día presionado dos veces, marca o desmarca la cruz
+      if (lastClickedDate === currentDate) {
+        if (currentDate.classList.contains("cross")) {
+          currentDate.classList.remove("cross");
+          delete markedDates[currentHouse][dateKey];
+        } else {
+          currentDate.classList.add("cross");
+          markedDates[currentHouse][dateKey] = true;
+        }
+        saveMarkedDates(); // Guardar cambios
+        lastClickedDate = null; // Restablecemos la variable
       } else {
-        markedDates[currentHouse][dateKey] = true;
+        lastClickedDate = currentDate;
       }
-      saveMarkedDates(); // Guardar cambios
+
       renderCalendar(); // Actualizar calendario
     });
 
@@ -119,3 +129,6 @@ nextMonthBtn.addEventListener("click", () => {
 
 // Inicializar el calendario
 renderCalendar();
+
+// Variable global para controlar el doble clic
+let lastClickedDate = null;
