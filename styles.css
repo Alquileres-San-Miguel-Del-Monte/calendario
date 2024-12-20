@@ -1,3 +1,4 @@
+/* Estilos generales de la página */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -5,22 +6,22 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    background-color: black; /* Fondo negro */
+    background-color: black;
     height: 100vh;
-    color: white; /* Texto blanco */
-    overflow-x: hidden; /* Evitar el desbordamiento horizontal */
-    touch-action: manipulation; /* Evitar el zoom al tocar */
+    color: white;
+    overflow-x: hidden;
+    touch-action: manipulation; /* Evitar el zoom al tocar la pantalla */
 }
 
 /* Estilo del título */
 h1 {
     margin: 0;
     padding: 20px;
-    background-color: navy; /* Barra azul marino */
+    background-color: navy;
     color: white;
     text-align: center;
     width: 100%;
-    font-family: 'Playfair Display', serif; /* Fuente llamativa */
+    font-family: 'Playfair Display', serif;
     font-size: 1.8em;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
@@ -29,10 +30,10 @@ h1 {
 #calendar-container {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centra el calendario y los controles */
-    width: 100%; /* Ajustar el calendario a todo el ancho de la pantalla */
-    max-width: 380px; /* Limitar el tamaño máximo */
-    margin: 0 auto; /* Centrado horizontal */
+    align-items: center;
+    width: 100%;
+    max-width: 380px;
+    margin: 0 auto;
     padding: 10px;
 }
 
@@ -74,8 +75,8 @@ button:hover {
 /* Contenedor del calendario */
 #calendar {
     display: grid;
-    grid-template-columns: repeat(7, 1fr); /* 7 columnas */
-    gap: 6px; /* Reducir el espacio entre las celdas */
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
     width: 100%;
     background-color: black;
     padding: 10px;
@@ -88,23 +89,23 @@ button:hover {
     align-items: center;
     justify-content: center;
     border: 1px solid #444;
-    width: 40px; /* Ancho reducido para dispositivos móviles */
-    height: 60px; /* Ajustar la altura */
+    width: 40px;
+    height: 60px;
     cursor: pointer;
     position: relative;
     background-color: black;
     color: white;
-    font-size: 1.2em; /* Ajustar el tamaño del texto */
+    font-size: 1.2em;
 }
 
-/* Estilo para los encabezados de los días de la semana */
+/* Estilo para los días de la semana */
 .day-header {
     font-weight: bold;
     text-align: center;
     color: white;
     padding: 8px 0;
     border-bottom: 3px solid #444;
-    background-color: #333; /* Fondo oscuro para los días de la semana */
+    background-color: #333;
 }
 
 /* Estilo de los días en el calendario */
@@ -112,7 +113,7 @@ button:hover {
     background-color: #444;
 }
 
-/* Cruces más pequeñas */
+/* Cruces en los días */
 .date.cross::after {
     content: '✘';
     color: red;
@@ -120,29 +121,29 @@ button:hover {
     position: absolute;
 }
 
-/* Ajuste para pantallas más pequeñas (como un iPhone 13) */
+/* Ajuste para pantallas más pequeñas */
 @media (max-width: 600px) {
     body {
-        display: block; /* No usar flexbox, sino que cada elemento tenga su espacio */
+        display: block;
     }
 
     #calendar-container {
-        width: 100%; /* Ajuste al ancho total de la pantalla */
-        padding: 15px 10px; /* Añadir algo de margen */
+        width: 100%;
+        padding: 15px 10px;
     }
 
     #calendar {
-        gap: 5px; /* Reducir espacio entre las celdas */
+        gap: 5px;
     }
 
     .date {
-        width: 40px; /* Ancho reducido para pantallas más pequeñas */
-        height: 60px; /* Ajustar la altura */
-        font-size: 1.2em; /* Tamaño del texto ajustado */
+        width: 40px;
+        height: 60px;
+        font-size: 1.2em;
     }
 
     .date.cross::after {
-        font-size: 1em; /* Cruces más pequeñas en dispositivos móviles */
+        font-size: 1em;
     }
 
     button {
@@ -150,9 +151,8 @@ button:hover {
         padding: 5px 8px;
     }
 
-    /* Estilo de los encabezados de días de la semana */
     .day-header {
-        font-size: 1em; /* Tamaño ajustado de los días de la semana */
+        font-size: 1em;
         padding: 10px;
     }
 
@@ -160,31 +160,4 @@ button:hover {
         font-size: 0.9em;
         padding: 3px 6px;
     }
-}
-
-/* Estilo para los botones de las casas */
-#house-selector {
-    display: flex;
-    justify-content: flex-start; /* Alineación hacia la izquierda */
-    gap: 10px; /* Espacio entre los botones */
-    margin-top: 20px; /* Espacio adicional para que no se peguen al título */
-}
-
-/* Estilo de los botones de las casas */
-#house-selector button {
-    font-family: 'Playfair Display', serif;
-    font-size: 1em;
-    background-color: white;
-    color: black;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    text-align: center;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-/* Casa seleccionada */
-#house-selector button.selected {
-    background-color: navy;
-    color: white;
 }
