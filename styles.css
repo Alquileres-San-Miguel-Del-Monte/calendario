@@ -29,8 +29,8 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: center; /* Centra el calendario y los controles */
-    width: 80%; /* Ajustar a pantallas móviles */
-    max-width: 600px; /* Limitar tamaño máximo */
+    width: 70%; /* Reducir el ancho del calendario */
+    max-width: 500px; /* Limitar el tamaño máximo */
     margin: 15px auto; /* Centrado */
 }
 
@@ -73,7 +73,7 @@ button:hover {
 #calendar {
     display: grid;
     grid-template-columns: repeat(7, 1fr); /* 7 columnas */
-    gap: 10px; /* Aumentar espacio entre las celdas */
+    gap: 6px; /* Reducir el espacio entre las celdas */
     width: 100%;
     background-color: black;
     padding: 10px;
@@ -86,13 +86,13 @@ button:hover {
     align-items: center;
     justify-content: center;
     border: 1px solid #444;
-    width: 70px; /* Más ancho */
-    height: 90px; /* Mayor altura para hacerlo más rectangular */
+    width: 55px; /* Reducir el ancho */
+    height: 70px; /* Ajustar la altura */
     cursor: pointer;
     position: relative;
     background-color: black;
     color: white;
-    font-size: 1.1em; /* Aumento de tamaño del texto */
+    font-size: 1em; /* Tamaño de texto ajustado */
 }
 
 /* Estilo para los encabezados de los días de la semana */
@@ -100,7 +100,7 @@ button:hover {
     font-weight: bold;
     text-align: center;
     color: white;
-    padding: 10px 0;
+    padding: 8px 0;
     border-bottom: 3px solid #444;
     background-color: #333; /* Fondo oscuro para los días de la semana */
 }
@@ -121,7 +121,7 @@ button:hover {
 /* Ajuste para pantallas más pequeñas */
 @media (max-width: 600px) {
     #calendar-container {
-        width: 95%; /* Ajustar el contenedor en pantallas pequeñas */
+        width: 90%; /* Ajustar el contenedor en pantallas pequeñas */
     }
 
     #calendar {
@@ -129,8 +129,8 @@ button:hover {
     }
 
     .date {
-        width: 60px; /* Ancho de celdas ajustado en pantallas pequeñas */
-        height: 80px; /* Altura ajustada */
+        width: 55px; /* Ancho ajustado en pantallas pequeñas */
+        height: 70px; /* Altura ajustada */
         font-size: 1.2em; /* Tamaño del texto ajustado */
     }
 
@@ -153,4 +153,31 @@ button:hover {
         font-size: 0.9em;
         padding: 3px 6px;
     }
+}
+
+/* Estilo para los botones de las casas */
+#house-selector {
+    display: flex;
+    justify-content: flex-start; /* Alineación hacia la izquierda */
+    gap: 10px; /* Espacio entre los botones */
+    margin-top: 20px; /* Espacio adicional para que no se peguen al título */
+}
+
+/* Estilo de los botones de las casas */
+#house-selector button {
+    font-family: 'Playfair Display', serif;
+    font-size: 1em;
+    background-color: white;
+    color: black;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Casa seleccionada */
+#house-selector button.selected {
+    background-color: navy;
+    color: white;
 }
