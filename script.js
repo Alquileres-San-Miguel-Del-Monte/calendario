@@ -39,14 +39,13 @@ function renderCalendar() {
   calendar.innerHTML = "";
 
   // Agregar los días de la semana
-const daysOfWeek = ["L", "M", "M", "J", "V", "S", "D"];
-daysOfWeek.forEach((day) => {
-  const dayHeader = document.createElement("div");
-  dayHeader.className = "day-header"; // Clase para estilo
-  dayHeader.textContent = day;
-  calendar.appendChild(dayHeader);
-});
-
+  const daysOfWeek = ["L", "M", "M", "J", "V", "S", "D"];
+  daysOfWeek.forEach((day) => {
+    const dayHeader = document.createElement("div");
+    dayHeader.className = "day-header"; // Clase para estilo
+    dayHeader.textContent = day;
+    calendar.appendChild(dayHeader);
+  });
 
   // Agregar los días vacíos al principio
   for (let i = 0; i < firstDay; i++) {
@@ -67,15 +66,32 @@ daysOfWeek.forEach((day) => {
       dateCell.classList.add("cross");
     }
 
-    // Agregar el evento de doble clic
-    dateCell.addEventListener("dblclick", () => {
-      if (markedDates[currentHouse][dateKey]) {
-        delete markedDates[currentHouse][dateKey];
-      } else {
-        markedDates[currentHouse][dateKey] = true;
+    // Agregar el evento para mantener presionado
+    let isPressing = false;
+
+    dateCell.addEventListener("mousedown", (event) => {
+      isPressing = true; // El usuario comienza a presionar
+      // Prevenir la selección de texto al mantener presionado
+      event.preventDefault();
+    });
+
+    dateCell.addEventListener("mouseup", () => {
+      if (isPressing) {
+        toggleCross(dateKey);
+        isPressing = false;
       }
-      saveMarkedDates(); // Guardar cambios
-      renderCalendar(); // Actualizar calendario
+    });
+
+    dateCell.addEventListener("touchstart", (event) => {
+      isPressing = true; // El usuario comienza a presionar (en dispositivos táctiles)
+      event.preventDefault();
+    });
+
+    dateCell.addEventListener("touchend", () => {
+      if (isPressing) {
+        toggleCross(dateKey);
+        isPressing = false;
+      }
     });
 
     calendar.appendChild(dateCell);
@@ -104,6 +120,20 @@ function highlightSelectedHouse() {
       button.classList.remove("selected");
     }
   });
+}
+
+// Función para alternar la cruz
+function toggleCross(dateKey) {
+  const dateCell = document.querySelector(`.date[data-date="${dateKey}"]`);
+  if (dateCell.classList.contains("cross")) {
+    dateCell.classList.remove("cross");
+    delete markedDates[currentHouse][dateKey];
+  } else {
+    dateCell.classList.add("cross");
+    markedDates[currentHouse][dateKey] = true;
+  }
+  saveMarkedDates(); // Guardar cambios
+  renderCalendar(); // Actualizar calendario
 }
 
 // Navegar entre meses
