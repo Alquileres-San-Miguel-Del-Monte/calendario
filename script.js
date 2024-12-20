@@ -39,7 +39,7 @@ function renderCalendar() {
   calendar.innerHTML = "";
 
   // Agregar los días de la semana
-const daysOfWeek = ["L", "M", "M", "J", "V", "S", "D"];
+const daysOfWeek = ["L", "M", "", "J", "V", "S", "D"];
 daysOfWeek.forEach((day) => {
   const dayHeader = document.createElement("div");
   dayHeader.className = "day-header"; // Clase para estilo
