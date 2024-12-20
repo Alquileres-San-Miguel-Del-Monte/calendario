@@ -13,6 +13,7 @@ let markedDates = {
   EL_ENCANTO: {},
 };
 let currentHouse = "LOS_CHICOS"; // Casa seleccionada por defecto
+let touchTimeout; // Para controlar el tiempo de toque
 
 // Cargar datos almacenados localmente
 if (localStorage.getItem("markedDates")) {
@@ -69,13 +70,22 @@ function renderCalendar() {
     // Agregar el evento de mantener presionado
     dateCell.addEventListener("touchstart", (e) => {
       e.preventDefault(); // Prevenir el evento por defecto de touch
-      if (markedDates[currentHouse][dateKey]) {
-        delete markedDates[currentHouse][dateKey];
-      } else {
-        markedDates[currentHouse][dateKey] = true;
-      }
-      saveMarkedDates(); // Guardar cambios
-      renderCalendar(); // Actualizar calendario
+
+      // Iniciar el temporizador para detectar el tiempo de toque
+      touchTimeout = setTimeout(() => {
+        if (markedDates[currentHouse][dateKey]) {
+          delete markedDates[currentHouse][dateKey];
+        } else {
+          markedDates[currentHouse][dateKey] = true;
+        }
+        saveMarkedDates(); // Guardar cambios
+        renderCalendar(); // Actualizar calendario
+      }, 1000); // 1 segundo
+    });
+
+    // Cancelar el temporizador si el toque termina antes de 1 segundo
+    dateCell.addEventListener("touchend", () => {
+      clearTimeout(touchTimeout);
     });
 
     calendar.appendChild(dateCell);
