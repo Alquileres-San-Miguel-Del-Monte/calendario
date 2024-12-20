@@ -38,6 +38,16 @@ function renderCalendar() {
 
   calendar.innerHTML = "";
 
+  // Agregar los días de la semana
+const daysOfWeek = ["L", "M", "M", "J", "V", "S", "D"];
+daysOfWeek.forEach((day) => {
+  const dayHeader = document.createElement("div");
+  dayHeader.className = "day-header"; // Clase para estilo
+  dayHeader.textContent = day;
+  calendar.appendChild(dayHeader);
+});
+
+
   // Agregar los días vacíos al principio
   for (let i = 0; i < firstDay; i++) {
     const emptyCell = document.createElement("div");
