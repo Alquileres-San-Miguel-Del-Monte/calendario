@@ -10,6 +10,7 @@ body {
     height: 100vh;
     color: white; /* Texto blanco */
     overflow-x: hidden; /* Evitar el desbordamiento horizontal */
+    touch-action: none; /* Desactiva el zoom y el movimiento táctil */
 }
 
 /* Estilo del título */
@@ -124,6 +125,7 @@ button:hover {
 @media (max-width: 600px) {
     body {
         display: block; /* No usar flexbox, sino que cada elemento tenga su espacio */
+        overflow-x: hidden; /* Evitar el desbordamiento horizontal */
     }
 
     #calendar-container {
