@@ -1,134 +1,54 @@
-// Variables globales
-const calendar = document.getElementById("calendar");
-const currentMonth = document.getElementById("currentMonth");
-const prevMonthBtn = document.getElementById("prevMonth");
-const nextMonthBtn = document.getElementById("nextMonth");
-const houseSelector = document.getElementById("house-selector");
-
+// JavaScript para gestionar el calendario y las cruces
+const calendar = document.getElementById('calendar');
+const currentMonthElement = document.getElementById('currentMonth');
+const prevMonthButton = document.getElementById('prevMonth');
+const nextMonthButton = document.getElementById('nextMonth');
 let currentDate = new Date();
-let markedDates = {
-  LOS_CHICOS: {},
-  LOS_NIETOS: {},
-  LA_SONADA: {},
-  EL_ENCANTO: {},
-};
-let currentHouse = "LOS_CHICOS"; // Casa seleccionada por defecto
 
-// Cargar datos almacenados localmente
-if (localStorage.getItem("markedDates")) {
-  markedDates = JSON.parse(localStorage.getItem("markedDates"));
-}
-
-// Guardar fechas marcadas
-function saveMarkedDates() {
-  localStorage.setItem("markedDates", JSON.stringify(markedDates));
-}
-
-// Renderizar el calendario
+// Función para mostrar el calendario
 function renderCalendar() {
-  const year = currentDate.getFullYear();
-  const month = currentDate.getMonth();
-  const firstDay = new Date(year, month, 1).getDay();
-  const lastDate = new Date(year, month + 1, 0).getDate();
+    const month = currentDate.getMonth();
+    const year = currentDate.getFullYear();
+    const firstDay = new Date(year, month, 1);
+    const lastDay = new Date(year, month + 1, 0);
+    const daysInMonth = lastDay.getDate();
+    const startDay = firstDay.getDay();
 
-  currentMonth.textContent = currentDate.toLocaleDateString("es-ES", {
-    month: "long",
-    year: "numeric",
-  });
+    currentMonthElement.textContent = `${firstDay.toLocaleString('default', { month: 'long' })} ${year}`;
+    
+    calendar.innerHTML = ''; // Limpiar el calendario actual
 
-  calendar.innerHTML = "";
-
-  // Agregar los días de la semana
-  const daysOfWeek = ["L", "M", "M", "J", "V", "S", "D"];
-  daysOfWeek.forEach((day) => {
-    const dayHeader = document.createElement("div");
-    dayHeader.className = "day-header"; // Clase para estilo
-    dayHeader.textContent = day;
-    calendar.appendChild(dayHeader);
-  });
-
-  // Agregar los días vacíos al principio
-  for (let i = 0; i < firstDay; i++) {
-    const emptyCell = document.createElement("div");
-    calendar.appendChild(emptyCell);
-  }
-
-  // Agregar los días del mes
-  for (let date = 1; date <= lastDate; date++) {
-    const dateCell = document.createElement("div");
-    dateCell.className = "date";
-    dateCell.textContent = date;
-
-    const dateKey = `${year}-${month + 1}-${date}`;
-
-    // Marcar si la fecha ya está marcada
-    if (markedDates[currentHouse][dateKey]) {
-      dateCell.classList.add("cross");
+    // Crear las celdas de los días
+    for (let i = 0; i < startDay; i++) {
+        const emptyCell = document.createElement('div');
+        calendar.appendChild(emptyCell);
     }
 
-    // Agregar el evento de clic para marcar/desmarcar la cruz
-    dateCell.addEventListener("click", function () {
-      const currentDate = this;
+    for (let day = 1; day <= daysInMonth; day++) {
+        const dayCell = document.createElement('div');
+        dayCell.classList.add('date');
+        dayCell.textContent = day;
+        
+        // Agregar evento de doble clic para marcar/desmarcar
+        dayCell.addEventListener('dblclick', function() {
+            dayCell.classList.toggle('cross');
+        });
 
-      // Si es el mismo día presionado dos veces, marca o desmarca la cruz
-      if (lastClickedDate === currentDate) {
-        if (currentDate.classList.contains("cross")) {
-          currentDate.classList.remove("cross");
-          delete markedDates[currentHouse][dateKey];
-        } else {
-          currentDate.classList.add("cross");
-          markedDates[currentHouse][dateKey] = true;
-        }
-        saveMarkedDates(); // Guardar cambios
-        lastClickedDate = null; // Restablecemos la variable
-      } else {
-        lastClickedDate = currentDate;
-      }
-
-      renderCalendar(); // Actualizar calendario
-    });
-
-    calendar.appendChild(dateCell);
-  }
-
-  // Resaltar la casa seleccionada
-  highlightSelectedHouse();
+        calendar.appendChild(dayCell);
+    }
 }
 
-// Cambiar de casa
-houseSelector.addEventListener("click", (e) => {
-  if (e.target.tagName === "BUTTON") {
-    currentHouse = e.target.getAttribute("data-house");
+// Función para cambiar al mes anterior
+prevMonthButton.addEventListener('click', function() {
+    currentDate.setMonth(currentDate.getMonth() - 1);
     renderCalendar();
-  }
 });
 
-// Función para resaltar la casa seleccionada
-function highlightSelectedHouse() {
-  const houseButtons = houseSelector.querySelectorAll("button");
-  
-  houseButtons.forEach((button) => {
-    if (button.getAttribute("data-house") === currentHouse) {
-      button.classList.add("selected");
-    } else {
-      button.classList.remove("selected");
-    }
-  });
-}
-
-// Navegar entre meses
-prevMonthBtn.addEventListener("click", () => {
-  currentDate.setMonth(currentDate.getMonth() - 1);
-  renderCalendar();
-});
-
-nextMonthBtn.addEventListener("click", () => {
-  currentDate.setMonth(currentDate.getMonth() + 1);
-  renderCalendar();
+// Función para cambiar al mes siguiente
+nextMonthButton.addEventListener('click', function() {
+    currentDate.setMonth(currentDate.getMonth() + 1);
+    renderCalendar();
 });
 
 // Inicializar el calendario
 renderCalendar();
-
-// Variable global para controlar el doble clic
-let lastClickedDate = null;
