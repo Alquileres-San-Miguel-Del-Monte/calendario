@@ -9,18 +9,19 @@ body {
     background-color: black; /* Fondo negro */
     height: 100vh;
     color: white; /* Texto blanco */
+    overflow-x: hidden; /* Evitar el desbordamiento horizontal */
 }
 
 /* Estilo del título */
 h1 {
     margin: 0;
-    padding: 30px;
+    padding: 20px;
     background-color: navy; /* Barra azul marino */
     color: white;
     text-align: center;
     width: 100%;
     font-family: 'Playfair Display', serif; /* Fuente llamativa */
-    font-size: 2em;
+    font-size: 1.8em;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
 
@@ -29,9 +30,10 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: center; /* Centra el calendario y los controles */
-    width: 70%; /* Reducir el ancho del calendario */
-    max-width: 500px; /* Limitar el tamaño máximo */
-    margin: 15px auto; /* Centrado */
+    width: 100%; /* Ajustar el calendario a todo el ancho de la pantalla */
+    max-width: 380px; /* Limitar el tamaño máximo */
+    margin: 0 auto; /* Centrado horizontal */
+    padding: 10px;
 }
 
 /* Contenedor de los controles */
@@ -86,13 +88,13 @@ button:hover {
     align-items: center;
     justify-content: center;
     border: 1px solid #444;
-    width: 55px; /* Reducir el ancho */
-    height: 70px; /* Ajustar la altura */
+    width: 40px; /* Ancho reducido para dispositivos móviles */
+    height: 60px; /* Ajustar la altura */
     cursor: pointer;
     position: relative;
     background-color: black;
     color: white;
-    font-size: 1em; /* Tamaño de texto ajustado */
+    font-size: 1.2em; /* Ajustar el tamaño del texto */
 }
 
 /* Estilo para los encabezados de los días de la semana */
@@ -118,24 +120,29 @@ button:hover {
     position: absolute;
 }
 
-/* Ajuste para pantallas más pequeñas */
+/* Ajuste para pantallas más pequeñas (como un iPhone 13) */
 @media (max-width: 600px) {
+    body {
+        display: block; /* No usar flexbox, sino que cada elemento tenga su espacio */
+    }
+
     #calendar-container {
-        width: 90%; /* Ajustar el contenedor en pantallas pequeñas */
+        width: 100%; /* Ajuste al ancho total de la pantalla */
+        padding: 15px 10px; /* Añadir algo de margen */
     }
 
     #calendar {
-        gap: 5px; /* Reducir espacio entre las celdas en pantallas pequeñas */
+        gap: 5px; /* Reducir espacio entre las celdas */
     }
 
     .date {
-        width: 55px; /* Ancho ajustado en pantallas pequeñas */
-        height: 70px; /* Altura ajustada */
+        width: 40px; /* Ancho reducido para pantallas más pequeñas */
+        height: 60px; /* Ajustar la altura */
         font-size: 1.2em; /* Tamaño del texto ajustado */
     }
 
     .date.cross::after {
-        font-size: 1em; /* Cruces más pequeñas en móviles */
+        font-size: 1em; /* Cruces más pequeñas en dispositivos móviles */
     }
 
     button {
