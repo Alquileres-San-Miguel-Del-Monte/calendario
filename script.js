@@ -39,14 +39,13 @@ function renderCalendar() {
   calendar.innerHTML = "";
 
   // Agregar los días de la semana
-const daysOfWeek = ["L", "M", "M", "J", "V", "S", "D"];
-daysOfWeek.forEach((day) => {
-  const dayHeader = document.createElement("div");
-  dayHeader.className = "day-header"; // Clase para estilo
-  dayHeader.textContent = day;
-  calendar.appendChild(dayHeader);
-});
-
+  const daysOfWeek = ["L", "M", "M", "J", "V", "S", "D"];
+  daysOfWeek.forEach((day) => {
+    const dayHeader = document.createElement("div");
+    dayHeader.className = "day-header"; // Clase para estilo
+    dayHeader.textContent = day;
+    calendar.appendChild(dayHeader);
+  });
 
   // Agregar los días vacíos al principio
   for (let i = 0; i < firstDay; i++) {
@@ -67,8 +66,9 @@ daysOfWeek.forEach((day) => {
       dateCell.classList.add("cross");
     }
 
-    // Agregar el evento de doble clic
-    dateCell.addEventListener("dblclick", () => {
+    // Agregar el evento de mantener presionado
+    dateCell.addEventListener("touchstart", (e) => {
+      e.preventDefault(); // Prevenir el evento por defecto de touch
       if (markedDates[currentHouse][dateKey]) {
         delete markedDates[currentHouse][dateKey];
       } else {
@@ -96,7 +96,7 @@ houseSelector.addEventListener("click", (e) => {
 // Función para resaltar la casa seleccionada
 function highlightSelectedHouse() {
   const houseButtons = houseSelector.querySelectorAll("button");
-  
+
   houseButtons.forEach((button) => {
     if (button.getAttribute("data-house") === currentHouse) {
       button.classList.add("selected");
