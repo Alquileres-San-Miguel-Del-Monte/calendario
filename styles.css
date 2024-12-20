@@ -1,3 +1,4 @@
+
 /* Estilo general del cuerpo */
 body {
     margin: 0;
@@ -29,9 +30,9 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: center; /* Centra el calendario y los controles */
-    width: 90%; /* Ajustar a pantallas móviles */
-    max-width: 400px; /* Limitar tamaño máximo */
-    margin: 20px auto; /* Centrado */
+    width: 100%; /* Ajustar a pantallas móviles */
+    max-width: 500px; /* Limitar tamaño máximo */
+    margin: 15px auto; /* Centrado */
 }
 
 /* Contenedor de los controles */
@@ -40,7 +41,7 @@ h1 {
     align-items: center;
     justify-content: center;
     margin: 10px 0;
-    gap: 8px;
+    gap: 10px;
 }
 
 /* Botones de anterior y siguiente */
@@ -96,7 +97,7 @@ button:hover {
 }
 
 .date:hover {
-    background-color: #333;
+    background-color: #555;
 }
 
 /* Cruces más pequeñas */
@@ -141,13 +142,13 @@ button:hover {
     }
 
     #calendar {
-        gap: 3px; /* Reducir espacio entre casillas */
+        gap: 10px; /* Reducir espacio entre casillas */
     }
 
     .date {
-        width: 40px; /* Más cuadrado en móviles */
-        height: 40px; /* Igual a ancho */
-        font-size: 0.8em; /* Reducir tamaño del texto */
+        width: 70px; /* Más cuadrado en móviles */
+        height: 70px; /* Igual a ancho */
+        font-size: 1.2em; /* Reducir tamaño del texto */
     }
 
     .date.cross::after {
@@ -159,8 +160,29 @@ button:hover {
         padding: 5px 8px;
     }
 
+    /* Estilo de los encabezados de días de la semana */
+.day-header {
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    padding: 5px 0;
+    border-bottom: 1px solid #444;
+}
+
+
     #currentMonth {
         font-size: 0.9em;
         padding: 3px 6px;
     }
 }
+
+/* Estilo para las letras de los días */
+.day-header {
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    padding: 5px;
+    background-color: #444; /* Fondo oscuro */
+    border-radius: 3px;
+}
+
