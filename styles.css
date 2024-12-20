@@ -9,6 +9,7 @@ body {
     height: 100vh;
     color: white; /* Texto blanco */
     overflow-x: hidden; /* Evitar el desbordamiento horizontal */
+    touch-action: manipulation; /* Evitar el zoom al tocar */
 }
 
 /* Estilo del título */
