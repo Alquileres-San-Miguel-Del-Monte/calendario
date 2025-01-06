@@ -3,19 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calendario</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Vincula tu archivo CSS -->
+    <title>Alquileres San Miguel del Monte</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Calendario</h1>
-    <div id="calendar-container">
-        <div id="controls">
-            <button id="prevMonth">Anterior</button>
-            <span id="currentMonth"></span>
-            <button id="nextMonth">Siguiente</button>
+    <div class="container">
+        <h1 class="title">ALQUILERES SAN MIGUEL DEL MONTE</h1>
+        <div class="house-selector">
+            <button data-house="los-chicos">Los Chicos</button>
+            <button data-house="los-nietos">Los Nietos</button>
+            <button data-house="la-soñada">La Soñada</button>
+            <button data-house="el-encanto">El Encanto</button>
         </div>
-        <div id="calendar"></div>
+        <div id="calendar-container">
+            <div class="calendar-header">
+                <button id="prev-month">&lt;</button>
+                <span id="month-year"></span>
+                <button id="next-month">&gt;</button>
+            </div>
+            <div id="days-of-week"></div>
+            <div id="days-container"></div>
+        </div>
     </div>
-    <script src="script.js"></script> <!-- Vincula tu archivo JavaScript -->
+    <script src="script.js"></script>
 </body>
 </html>
