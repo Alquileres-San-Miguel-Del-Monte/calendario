@@ -1,54 +1,94 @@
-// JavaScript para gestionar el calendario y las cruces
-const calendar = document.getElementById('calendar');
-const currentMonthElement = document.getElementById('currentMonth');
-const prevMonthButton = document.getElementById('prevMonth');
-const nextMonthButton = document.getElementById('nextMonth');
-let currentDate = new Date();
+document.addEventListener("DOMContentLoaded", () => {
+  const calendarContainer = document.getElementById("calendar-container");
+  const houseButtons = document.querySelectorAll(".house-selector button");
+  const monthYear = document.getElementById("month-year");
+  const daysOfWeek = document.getElementById("days-of-week");
+  const daysContainer = document.getElementById("days-container");
+  const prevMonthButton = document.getElementById("prev-month");
+  const nextMonthButton = document.getElementById("next-month");
 
-// Función para mostrar el calendario
-function renderCalendar() {
-    const month = currentDate.getMonth();
-    const year = currentDate.getFullYear();
-    const firstDay = new Date(year, month, 1);
-    const lastDay = new Date(year, month + 1, 0);
-    const daysInMonth = lastDay.getDate();
-    const startDay = firstDay.getDay();
+  const daysOfWeekNames = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
+  const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 
-    currentMonthElement.textContent = `${firstDay.toLocaleString('default', { month: 'long' })} ${year}`;
-    
-    calendar.innerHTML = ''; // Limpiar el calendario actual
+  let selectedHouse = "los-chicos";
+  let currentDate = new Date();
 
-    // Crear las celdas de los días
-    for (let i = 0; i < startDay; i++) {
-        const emptyCell = document.createElement('div');
-        calendar.appendChild(emptyCell);
-    }
+  // Generar encabezados de días de la semana
+  const generateDaysOfWeek = () => {
+      daysOfWeek.innerHTML = "";
+      daysOfWeekNames.forEach(day => {
+          const dayElement = document.createElement("div");
+          dayElement.textContent = day;
+          daysOfWeek.appendChild(dayElement);
+      });
+  };
 
-    for (let day = 1; day <= daysInMonth; day++) {
-        const dayCell = document.createElement('div');
-        dayCell.classList.add('date');
-        dayCell.textContent = day;
-        
-        // Agregar evento de doble clic para marcar/desmarcar
-        dayCell.addEventListener('dblclick', function() {
-            dayCell.classList.toggle('cross');
-        });
+  // Generar calendario
+  const generateCalendar = () => {
+      const year = currentDate.getFullYear();
+      const month = currentDate.getMonth();
+      const firstDayOfMonth = new Date(year, month, 1).getDay();
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
 
-        calendar.appendChild(dayCell);
-    }
-}
+      monthYear.textContent = `${monthNames[month]} ${year}`;
+      daysContainer.innerHTML = "";
 
-// Función para cambiar al mes anterior
-prevMonthButton.addEventListener('click', function() {
-    currentDate.setMonth(currentDate.getMonth() - 1);
-    renderCalendar();
+      // Ajustar para comenzar desde el primer día correcto
+      for (let i = 0; i < (firstDayOfMonth === 0 ? 6 : firstDayOfMonth - 1); i++) {
+          const emptyDay = document.createElement("div");
+          emptyDay.classList.add("day", "empty");
+          daysContainer.appendChild(emptyDay);
+      }
+
+      // Crear días del mes
+      for (let i = 1; i <= daysInMonth; i++) {
+          const day = document.createElement("div");
+          day.classList.add("day");
+          day.textContent = i;
+
+          // Restaurar estado del día desde localStorage
+          const savedDays = JSON.parse(localStorage.getItem(`${selectedHouse}-${year}-${month}`)) || {};
+          if (savedDays[i]) {
+              day.classList.add("unavailable");
+          }
+
+          // Agregar evento de doble clic
+          day.addEventListener("dblclick", () => {
+              day.classList.toggle("unavailable");
+
+              const updatedDays = JSON.parse(localStorage.getItem(`${selectedHouse}-${year}-${month}`)) || {};
+              if (day.classList.contains("unavailable")) {
+                  updatedDays[i] = true;
+              } else {
+                  delete updatedDays[i];
+              }
+              localStorage.setItem(`${selectedHouse}-${year}-${month}`, JSON.stringify(updatedDays));
+          });
+
+          daysContainer.appendChild(day);
+      }
+  };
+
+  // Cambiar mes
+  prevMonthButton.addEventListener("click", () => {
+      currentDate.setMonth(currentDate.getMonth() - 1);
+      generateCalendar();
+  });
+
+  nextMonthButton.addEventListener("click", () => {
+      currentDate.setMonth(currentDate.getMonth() + 1);
+      generateCalendar();
+  });
+
+  // Cambiar casa
+  houseButtons.forEach(button => {
+      button.addEventListener("click", () => {
+          selectedHouse = button.dataset.house;
+          generateCalendar();
+      });
+  });
+
+  // Inicializar calendario
+  generateDaysOfWeek();
+  generateCalendar();
 });
-
-// Función para cambiar al mes siguiente
-nextMonthButton.addEventListener('click', function() {
-    currentDate.setMonth(currentDate.getMonth() + 1);
-    renderCalendar();
-});
-
-// Inicializar el calendario
-renderCalendar();
