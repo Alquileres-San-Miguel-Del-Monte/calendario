@@ -1,163 +1,101 @@
-/* Estilos generales de la página */
 body {
-    margin: 0;
     font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    background-color: black;
-    height: 100vh;
-    color: white;
-    overflow-x: hidden;
-    touch-action: manipulation; /* Evitar el zoom al tocar la pantalla */
-}
-
-/* Estilo del título */
-h1 {
     margin: 0;
+    background-color: #f5f5dc;
+    color: #333;
+}
+
+.container {
+    text-align: center;
     padding: 20px;
-    background-color: navy;
-    color: white;
-    text-align: center;
-    width: 100%;
-    font-family: 'Playfair Display', serif;
-    font-size: 1.8em;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
 
-/* Contenedor del calendario */
-#calendar-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 380px;
-    margin: 0 auto;
-    padding: 10px;
+.title {
+    font-size: 2rem;
+    color: #4b2e2e;
+    margin-bottom: 20px;
 }
 
-/* Contenedor de los controles */
-#controls {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 10px 0;
-    gap: 8px;
-}
-
-/* Botones de anterior y siguiente */
-button {
-    padding: 5px 10px;
-    font-size: 1em;
-    background-color: navy;
-    color: white;
+.house-selector button {
+    background-color: #d3b8ae;
+    color: #fff;
     border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    margin: 5px;
     cursor: pointer;
-    border-radius: 5px;
+    font-size: 1rem;
 }
 
-button:hover {
-    background-color: #003366;
+.house-selector button:hover {
+    background-color: #4b2e2e;
 }
 
-/* Nombre del mes */
-#currentMonth {
-    font-size: 1em;
-    font-family: 'Playfair Display', serif;
-    background-color: white;
-    color: black;
-    padding: 5px 10px;
-    border-radius: 5px;
+#calendar-container {
+    margin-top: 20px;
+    max-width: 500px;
+    margin: 0 auto;
     text-align: center;
 }
 
-/* Contenedor del calendario */
-#calendar {
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.calendar-header button {
+    background-color: #d3b8ae;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.calendar-header button:hover {
+    background-color: #4b2e2e;
+}
+
+#days-of-week {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 6px;
-    width: 100%;
-    background-color: black;
-    padding: 10px;
-    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.3);
-}
-
-/* Estilo de cada día */
-.date {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid #444;
-    width: 40px;
-    height: 60px;
-    cursor: pointer;
-    position: relative;
-    background-color: black;
-    color: white;
-    font-size: 1.2em;
-}
-
-/* Estilo para los días de la semana */
-.day-header {
+    gap: 5px;
     font-weight: bold;
+}
+
+#days-container {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+.day {
+    border: 1px solid #ccc;
+    padding: 10px;
     text-align: center;
-    color: white;
-    padding: 8px 0;
-    border-bottom: 3px solid #444;
-    background-color: #333;
+    position: relative;
+    background-color: #fff;
+    cursor: pointer;
+    user-select: none;
 }
 
-/* Estilo de los días en el calendario */
-.date:hover {
-    background-color: #444;
+.day.unavailable {
+    background-color: #ffcccc;
 }
 
-/* Cruces en los días */
-.date.cross::after {
-    content: '✘';
+.day::after {
+    content: "\\2716"; /* Unicode para una cruz roja */
     color: red;
-    font-size: 1.2em;
+    font-size: 1.2rem;
     position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
 }
 
-/* Ajuste para pantallas más pequeñas */
-@media (max-width: 600px) {
-    body {
-        display: block;
-    }
-
-    #calendar-container {
-        width: 100%;
-        padding: 15px 10px;
-    }
-
-    #calendar {
-        gap: 5px;
-    }
-
-    .date {
-        width: 40px;
-        height: 60px;
-        font-size: 1.2em;
-    }
-
-    .date.cross::after {
-        font-size: 1em;
-    }
-
-    button {
-        font-size: 0.9em;
-        padding: 5px 8px;
-    }
-
-    .day-header {
-        font-size: 1em;
-        padding: 10px;
-    }
-
-    #currentMonth {
-        font-size: 0.9em;
-        padding: 3px 6px;
-    }
+.day.unavailable::after {
+    display: block;
 }
